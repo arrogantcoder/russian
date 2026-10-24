@@ -21,6 +21,8 @@ audio pipeline.
   `ё`-folding; part-of-speech filter; paged rendering.
 - **Trainer**: four scripted offline role-plays with answer checking, hints, and corrections;
   optional chat against any OpenAI-compatible endpoint.
+- **Fixed purple dark theme**: deep purple-black surfaces, lavender text, violet accents; no theme
+  switch and no light mode.
 - **No build step**, no accounts, no analytics. All assets are local except the optional API call.
 
 ## Structure
@@ -113,6 +115,8 @@ MIT. See [LICENSE](LICENSE).
   bubble.
 - Audio: all 47 MP3s load with finite durations; playback advances `currentTime`, ends cleanly, and
   stops on a second click.
+- Theme: fixed dark palette only; no toggle and no light-mode code path. Measured contrast:
+  text/background 16.5:1, muted text 7.6:1, links 9.9:1, button text on accent 11.2:1.
 - Mobile: no horizontal overflow at 320–1280 px; menu, 16 px inputs, 44 px targets, instant anchor
   jumps, safe-area padding, stacked dictionary cards.
 - GitHub Pages: relative asset paths, `.nojekyll` present, `LICENSE` and `favicon.svg` linked.

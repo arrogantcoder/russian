@@ -512,39 +512,6 @@
     renderParadigm(0);
   }
 
-  /* ------------------------------------------------------------------ */
-  /* Theme                                                              */
-  /* ------------------------------------------------------------------ */
-
-  function initTheme() {
-    const root = document.documentElement;
-    const button = $("#theme-toggle");
-    let stored = null;
-    try { stored = localStorage.getItem("ru-explainer-theme"); } catch (err) { /* private mode */ }
-    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initial = stored || (prefersDark ? "dark" : "light");
-    root.setAttribute("data-theme", initial);
-
-    const syncThemeColor = () => {
-      const meta = document.getElementById("theme-color");
-      if (meta) {
-        meta.setAttribute("content", root.getAttribute("data-theme") === "dark" ? "#121317" : "#f7f5f0");
-      }
-    };
-    syncThemeColor();
-
-    if (button) {
-      button.setAttribute("aria-pressed", String(initial === "dark"));
-      button.addEventListener("click", () => {
-        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", next);
-        button.setAttribute("aria-pressed", String(next === "dark"));
-        syncThemeColor();
-        try { localStorage.setItem("ru-explainer-theme", next); } catch (err) { /* ignore */ }
-      });
-    }
-  }
-
   function initNav() {
     const header = $(".topbar");
     const toggle = $("#nav-toggle");
@@ -595,7 +562,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    initTheme();
     initNav();
     renderDialogues();
     initAudio();

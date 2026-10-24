@@ -1,21 +1,23 @@
 /* ============================================================
    Learn Russian — stylesheet
-   Editorial, print-inspired; two themes; no external assets.
+   Editorial, print-inspired; fixed purple dark theme; no external assets.
    ============================================================ */
 
 :root {
-  --paper: #f7f5f0;
-  --panel: #fffefb;
-  --ink: #16171b;
-  --ink-soft: #34363d;
-  --muted: #6c6a64;
-  --line: #ddd8cd;
-  --line-strong: #c8c2b4;
-  --accent: #a3231b;
-  --accent-ink: #7d1712;
-  --accent-soft: #f4e3df;
-  --code-bg: #efece4;
-  --shadow: 0 1px 2px rgba(22, 23, 27, 0.04), 0 12px 32px rgba(22, 23, 27, 0.06);
+  color-scheme: dark;
+
+  --paper: #0e0916;
+  --panel: #171021;
+  --ink: #efe9f8;
+  --ink-soft: #d6cbe8;
+  --muted: #a99bbf;
+  --line: #2a2038;
+  --line-strong: #3d2f56;
+  --accent: #b388ff;
+  --accent-ink: #cbb0ff;
+  --accent-soft: #241a36;
+  --code-bg: #1d132b;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 16px 40px rgba(0, 0, 0, 0.5);
 
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -24,21 +26,6 @@
   --measure: 68ch;
   --page: 1120px;
   --radius: 14px;
-}
-
-[data-theme="dark"] {
-  --paper: #121317;
-  --panel: #181a20;
-  --ink: #eceae4;
-  --ink-soft: #cfccc4;
-  --muted: #9b978d;
-  --line: #2b2d34;
-  --line-strong: #3b3e47;
-  --accent: #e0604f;
-  --accent-ink: #f08a7c;
-  --accent-soft: #2a1c1a;
-  --code-bg: #20222a;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
 *,
@@ -65,7 +52,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: #140d20;
 }
 
 a {
@@ -167,28 +154,6 @@ a:hover { color: var(--accent); }
   color: var(--accent-ink);
   border-bottom-color: var(--accent);
 }
-
-.theme-toggle {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: transparent;
-  color: var(--ink-soft);
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  padding: 0.35rem 0.7rem;
-  font: inherit;
-  font-size: 0.76rem;
-  cursor: pointer;
-}
-
-.theme-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent-ink);
-}
-
-.theme-toggle__icon { font-size: 0.95rem; }
 
 /* ------------------------------- layout ------------------------------- */
 
@@ -314,7 +279,7 @@ em[lang="ru"] { font-style: normal; }
 
 .hero__start a:hover {
   background: var(--accent);
-  color: #fff;
+  color: #140d20;
 }
 
 .stats {
@@ -412,7 +377,7 @@ select:focus {
 .btn {
   font: inherit;
   font-size: 0.85rem;
-  color: #fff;
+  color: #140d20;
   background: var(--accent);
   border: 1px solid var(--accent);
   border-radius: 8px;
@@ -569,10 +534,10 @@ table.dict {
 .letter[aria-pressed="true"] {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: #140d20;
 }
 
-.letter[aria-pressed="true"] .letter__name { color: rgba(255, 255, 255, 0.8); }
+.letter[aria-pressed="true"] .letter__name { color: rgba(20, 13, 32, 0.7); }
 
 .letter__glyph {
   font-family: var(--serif);
@@ -703,7 +668,6 @@ table.grid {
   .topbar__inner { gap: 1rem; }
   .nav { gap: 0.8rem; }
   .nav a { font-size: 0.8rem; }
-  .theme-toggle__label { display: none; }
 }
 
 @media (max-width: 720px) {
@@ -757,7 +721,7 @@ table.grid {
 }
 
 @media print {
-  .topbar, .controls, .more-wrap, .theme-toggle { display: none; }
+  .topbar, .controls, .more-wrap { display: none; }
   .table-wrap { max-height: none; overflow: visible; }
   .letter-panel, .table-wrap, .step, .about-card, .dialogue { box-shadow: none; }
   body { background: #fff; color: #000; font-size: 11pt; }
@@ -893,7 +857,7 @@ table.grid {
 .speak.is-playing {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: #140d20;
 }
 
 .dialogue__phrases {
@@ -1010,7 +974,7 @@ table.grid {
 .msg--user {
   align-self: flex-end;
   background: var(--accent);
-  color: #fff;
+  color: #140d20;
   border-bottom-right-radius: 4px;
 }
 
@@ -1428,9 +1392,6 @@ mark {
    Mobile hardening: menu, tap targets, iOS input zoom, safe areas
    ============================================================ */
 
-:root { color-scheme: light; }
-[data-theme="dark"] { color-scheme: dark; }
-
 body { overflow-wrap: break-word; }
 
 a, button, input, select, summary { touch-action: manipulation; }
@@ -1498,8 +1459,6 @@ a, button, input, select, summary { touch-action: manipulation; }
   .nav a:last-child { border-bottom: 0; }
   .nav a:hover { border-bottom-color: var(--line); }
 
-  .theme-toggle { min-height: 2.75rem; }
-  .theme-toggle__label { display: none; }
 }
 
 @media (max-width: 720px) {
@@ -1568,8 +1527,7 @@ a, button, input, select, summary { touch-action: manipulation; }
   .speak:active,
   .letter:active,
   .segmented button:active,
-  .nav-toggle:active,
-  .theme-toggle:active { opacity: 0.82; }
+  .nav-toggle:active { opacity: 0.82; }
 
   .letter:hover:not([aria-pressed="true"]) {
     transform: none;
