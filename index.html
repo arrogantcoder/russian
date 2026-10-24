@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" id="theme-color" content="#f7f5f0">
+<script>document.documentElement.classList.add("js");</script>
+<title>Learn Russian — free beginner course (A1–B1)</title>
+<meta name="description" content="A free Russian course for beginners: a 10-step roadmap, alphabet and pronunciation, six cases, verb aspect, a 734-entry dictionary, six dialogues with audio, and an offline trainer.">
+<meta property="og:title" content="Learn Russian — free beginner course">
+<meta property="og:description" content="A free Russian course for beginners: 10-step roadmap, alphabet, grammar, 734-entry dictionary, dialogues with audio, and a trainer.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" href="#top">
+      <span class="brand__ru" lang="ru">Русский с нуля</span>
+      <span class="brand__en">Learn Russian</span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span aria-hidden="true">☰</span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label="Sections">
+      <a href="#roadmap">Roadmap</a>
+      <a href="#alphabet">Alphabet</a>
+      <a href="#grammar">Grammar</a>
+      <a href="#dialogues">Dialogues</a>
+      <a href="#dictionary">Dictionary</a>
+      <a href="#trainer">Trainer</a>
+      <a href="#about">About</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+      <span class="theme-toggle__icon" aria-hidden="true">◐</span>
+      <span class="theme-toggle__label">Theme</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================== HERO ============================== -->
+  <section class="hero" id="top">
+    <p class="eyebrow">Free course · A1–B1 · No account</p>
+    <h1>Learn Russian<br>from zero.</h1>
+    <p class="lede">
+      A complete beginner course that runs entirely in the browser: a 10-step roadmap, the alphabet
+      and sound system, six cases and verb aspect, a 734-entry dictionary, six dialogues with
+      recordings, and a trainer that checks answers offline.
+    </p>
+    <p class="hero__start"><a href="#roadmap">Start with the roadmap</a></p>
+    <dl class="stats">
+      <div><dt>Letters</dt><dd>33</dd></div>
+      <div><dt>Cases</dt><dd>6</dd></div>
+      <div><dt>Roadmap steps</dt><dd>10</dd></div>
+      <div><dt>Dictionary entries</dt><dd id="stat-entries">—</dd></div>
+      <div><dt>Dialogues</dt><dd id="stat-dialogues">—</dd></div>
+      <div><dt>Recordings</dt><dd id="stat-recordings">—</dd></div>
+    </dl>
+  </section>
+
+  <!-- ============================== ROADMAP ============================== -->
+  <section class="section" id="roadmap">
+    <div class="section__head">
+      <h2>The 10-step roadmap</h2>
+      <p class="section__note">
+        A realistic route from the first letter to independent conversation. Timings assume
+        30–45 minutes a day; slower is fine. Each step ends with a checkpoint — move on when it
+        is met, not when the chapter feels finished.
+      </p>
+    </div>
+
+    <div class="study-card">
+      <h3>Four rules that matter more than the schedule</h3>
+      <ul>
+        <li><strong>Daily beats weekly.</strong> Twenty minutes every day outperforms three hours on Sunday.</li>
+        <li><strong>Read aloud from day one.</strong> Silent reading hides stress and vowel reduction; the voice is the skill.</li>
+        <li><strong>One grammar point per week.</strong> Apply it in ten sentences before adding the next.</li>
+        <li><strong>Review yesterday before today.</strong> Ten minutes on old words is part of the new lesson.</li>
+      </ul>
+    </div>
+
+    <h3 class="subhead" id="first-week">The first week</h3>
+    <div class="table-wrap">
+      <table class="grid week">
+        <thead><tr><th>Day</th><th>20–30 minutes</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Day">1</td><td data-label="20–30 minutes">Alphabet а–к. Read the letters aloud, write each five times.</td><td data-label="Output">Read ten syllables.</td></tr>
+          <tr><td data-label="Day">2</td><td data-label="20–30 minutes">Letters л–с. Add the hard/soft contrast: л vs ль.</td><td data-label="Output">Read ten short words.</td></tr>
+          <tr><td data-label="Day">3</td><td data-label="20–30 minutes">Letters т–я. The whole alphabet in order.</td><td data-label="Output">Recite the alphabet.</td></tr>
+          <tr><td data-label="Day">4</td><td data-label="20–30 minutes">Vowel reduction: молоко, хорошо. Listen and repeat.</td><td data-label="Output">Read five words with correct stress.</td></tr>
+          <tr><td data-label="Day">5</td><td data-label="20–30 minutes">First phrases: привет, меня зовут, я из.</td><td data-label="Output">Introduce yourself in four sentences.</td></tr>
+          <tr><td data-label="Day">6</td><td data-label="20–30 minutes">Question words: кто, что, где, куда, почему.</td><td data-label="Output">Ask five questions.</td></tr>
+          <tr><td data-label="Day">7</td><td data-label="20–30 minutes">Review the week; read dialogue 1 aloud.</td><td data-label="Output">Eight-sentence self-introduction.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead">The path</h3>
+    <ol class="roadmap">
+      <li class="step">
+        <div class="step__head">
+          <span class="step__no">01</span>
+          <div>
+            <h3>Alphabet and sounds</h3>
+            <p class="step__time">Weeks 1–2 · 30 min/day</p>
+          </div>
+        </div>
+        <p class="step__goal">Decode any word and read it aloud with the right stress.</p>
+        <ul class="step__list">
+          <li>33 letters, their names, and the hard/soft pairs: 10 vowels, 21 consonants, 2 silent signs.</li>
+          <li>Vowel reduction: unstressed о becomes [ɐ] or [ə]; final devoicing turns друг into [druk].</li>
+          <li>Read syllables and short words aloud daily. Grammar can wait two weeks.</li>
+          <li>Learn ten words a day from the dictionary, always with the stress mark.</li>
+        </ul>
+        <p class="step__check"><strong>Checkpoint:</strong> read 20 random dictionary headwords aloud and compare with the recordings.</p>
+        <p class="step__links"><a href="#alphabet">Alphabet</a><a href="#dictionary">Dictionary</a></p>
+      </li>
+
+      <li class="step">
+        <div class="step__head">
+          <span class="step__no">02</span>
+          <div>
+            <h3>First phrases and questions</h3>
+            <p class="step__time">Week 2 · 30 min/day</p>
+          </div>
+        </div>
+        <p class="step__goal">Survive a first exchange without switching to English.</p>
+        <ul class="step__list">
+          <li>Greetings, introductions, thanks, apologies: learn whole phrases, not isolated words.</li>
+          <li>Question words: кто, что, где, куда, откуда, почему, зачем, как, сколько.</li>
+          <li>Numbers 1–20, days of the week, and the polite вы-form.</li>
+          <li>Shadow dialogue 1 line by line; record yourself and compare with the audio.</li>
+        </ul>
+        <p class="step__check"><strong>Checkpoint:</strong> an eight-sentence self-introduction from memory and five questions asked aloud.</p>
+        <p class="step__links"><a href="#dialogues">Dialogues</a><a href="#trainer">Trainer</a></p>
+      </li>
+
+      <li class="step">
+        <div class="step__head">
+          <span class="step__no">03</span>
+          <div>
+            <h3>Gender, number, nominative</h3>
+            <p class="step__time">Weeks 2–3 · 30 min/day</p>
+          </div>
+        </div>
+        <p class="step__goal">Build correct noun phrases and simple descriptions.</p>
+        <ul class="step__list">
+          <li>Gender from the ending; ь-nouns must be memorised: день is masculine, ночь is feminine.</li>
+          <li>Plural formation, including the fleeting vowel (окно → окна, genitive окон).</li>
+          <li>Adjective agreement: новый файл, новая книга, новое окно, новые файлы.</li>
+          <li>No articles and no present-tense copula: «Это файл», not «Это есть файл».</li>
+        </ul>
+        <p class="step__check"><strong>Checkpoint:</strong> describe 15 objects with adjective + noun and give 10 plural forms.</p>
+        <p class="step__links"><a href="#nouns">Nouns</a><a href="#dictionary">Dictionary</a></p>
+      </li>
+
+      <li class="step">
+        <div class="step__head">
+          <span class="step__no">04</span>
+          <div>
+            <h3>Present tense and conjugation</h3>
+            <p class="step__time">Weeks 3–4 · 30 min/day</p>
+          </div>
+        </div>
+        <p class="step__goal">Talk about routine, facts, and preferences.</p>
+        <ul class="step__list">
+          <li>Two conjugations: читаешь / говоришь; stem changes such as писать → пишу.</li>
+          <li>Reflexive -ся: заниматься, нравиться, учиться.</li>
+          <li>Negation with не; double negation is obligatory with negative pronouns.</li>
+          <li>Time markers: сейчас, обычно, каждый день, иногда, никогда.</li>
+        </ul>
+        <p class="step__check"><strong>Checkpoint:</strong> conjugate 20 verbs in writing and produce 10 sentences about a daily routine.</p>
+        <p class="step__links"><a href="#verbs">Verbs</a><a href="#dictionary">Dictionary</a></p>
+      </li>
+
+      <li class="step">
+        <div class="step__head">
+          <span class="step__no">05</span>
+          <div>
+            <h3>Accusative and genitive</h3>
+            <p class="step__time">Weeks 4–6 · 35 min/day</p>
+          </div>
+        </div>
+        <p class="step__goal">Handle objects, absence, possession, and quantity.</p>
+        <ul class="step__list">
+          <li>Accusative for direct objects; animacy copies the genitive (вижу кота, but вижу стол).</li>
+          <li>Genitive after нет, без, из, от, до, у; possession and quantity.</li>
+          <li>Genitive plural is the hardest form: книг, мест, файлов, братьев.</li>
+          <li>Learn each new noun with its genitive plural from the dictionary.</li>
+        </ul>
+        <p class="step__check"><strong>Checkpoint:</strong> 30 sentences contrasting «вижу X» and «нет X», plus 10 quantity phrases.</p>
+        <p class="step__links"><a href="#cases">Cases</a><a href="#dictionary">Dictionary</a></p>
+      </li>
+
+      <li class="step">
+        <div class="step__head">
+          <span class="step__no">06</span>
+          <div>
+            <h3>Dative, instrumental, prepositional</h3>
+            <p class="step__time">Weeks 6–8 · 35 min/day</p>
+          </div>
+        </div>
+        <p class="step__goal">Talk about people, tools, places, and topics.</p>
+        <ul class="step__list">
+          <li>Dative: recipient and experiencer — дать мне, мне нужно, ему нравится.</li>
+          <li>Instrumental: с + person, instrument (ручкой), profession (стал инженером).</li>
+          <li>Prepositional: location and topic, always with a preposition — в файле, о работе.</li>
+          <li>Learn prepositions as case triggers, not as one-to-one translations.</li>
+        </ul>
+        <p class="step__check"><strong>Checkpoint:</strong> describe a commute, a tool, and a conversation topic in 12 sentences.</p>
+        <p class="step__links"><a href="#cases">Cases</a><a href="#pragmatics">Pragmatics</a></p>
+      </li>
+
+      <li class="step">
+        <div class="step__head">
+          <span class="step__no">07</span>
+          <div>
+            <h3>Aspect, past, future</h3>
+            <p class="step__time">Weeks 8–10 · 40 min/day</p>
+          </div>
+        </div>
+        <p class="step__goal">Choose between process and completed result without hesitating.</p>
+        <ul class="step__list">
+          <li>Every verb belongs to an aspect pair; perfective marks one completed result.</li>
+          <li>Past tense agrees with gender and number, never with person: я делал / я делала.</li>
+          <li>Future: буду + imperfective infinitive, or the perfective present form.</li>
+          <li>Build a personal list of 30 pairs: делать/сделать, писать/написать, проверять/проверить.</li>
+        </ul>
+        <p class="step__check"><strong>Checkpoint:</strong> retell yesterday in 12 sentences and justify each aspect choice.</p>
+        <p class="step__links"><a href="#verbs">Verbs</a><a href="#dictionary">Dictionary</a></p>
+      </li>
+
+      <li class="step">
+        <div class="step__head">
+          <span class="step__no">08</span>
+          <div>
+            <h3>Motion verbs and modality</h3>
+            <p class="step__time">Weeks 10–12 · 40 min/day</p>
+          </div>
+        </div>
+        <p class="step__goal">Describe routes, habits, plans, permission, and necessity.</p>
+        <ul class="step__list">
+          <li>Unidirectional vs multidirectional: идти/ходить, ехать/ездить, лететь/летать.</li>
+          <li>Prefixes that change direction: при-, у-, по-, вы-, до-.</li>
+          <li>Impersonal modality: нужно, надо, можно, нельзя + infinitive, with a dative person.</li>
+          <li>Distinguish location (где?) from direction (куда?) in every sentence.</li>
+        </ul>
+        <p class="step__check"><strong>Checkpoint:</strong> 15 sentences about routes and plans, plus spoken directions to a landmark.</p>
+        <p class="step__links"><a href="#verbs">Verbs</a><a href="#dialogues">Dialogues</a></p>
+      </li>
+
+      <li class="step">
+        <div class="step__head">
+          <span class="step__no">09</span>
+          <div>
+            <h3>Complex sentences and word order</h3>
+            <p class="step__time">Months 3–4 · 40 min/day</p>
+          </div>
+        </div>
+        <p class="step__goal">Connect ideas and control emphasis.</p>
+        <ul class="step__list">
+          <li>Subordinators: что, чтобы, если, хотя, пока, потому что; a comma precedes each clause.</li>
+          <li>Neutral subject–verb–object versus marked order: given information first, new information last.</li>
+          <li>Particles that carry stance: же, ведь, -то, вот, ну, уж.</li>
+          <li>Register: ты versus вы, diminutives, softened requests.</li>
+        </ul>
+        <p class="step__check"><strong>Checkpoint:</strong> a 150-word written text with five subordinate clauses and deliberate focus.</p>
+        <p class="step__links"><a href="#syntax">Syntax</a><a href="#pragmatics">Pragmatics</a></p>
+      </li>
+
+      <li class="step">
+        <div class="step__head">
+          <span class="step__no">10</span>
+          <div>
+            <h3>Real speech</h3>
+            <p class="step__time">Months 4–6 · daily</p>
+          </div>
+        </div>
+        <p class="step__goal">Hold an independent conversation at A2–B1 and read with a dictionary.</p>
+        <ul class="step__list">
+          <li>Fifteen minutes of listening every day; shadow one dialogue per week.</li>
+          <li>Role-play in the trainer; look up every unknown word and keep an error log.</li>
+          <li>Read short parallel texts; write 100 words a week and have them corrected.</li>
+          <li>Speak from day one. Mistakes are data, not failure.</li>
+        </ul>
+        <p class="step__check"><strong>Checkpoint:</strong> a five-minute conversation without switching to English; a 300-word text read with a dictionary.</p>
+        <p class="step__links"><a href="#dialogues">Dialogues</a><a href="#trainer">Trainer</a><a href="#dictionary">Dictionary</a></p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============================== DIALOGUES ============================== -->
+  <section class="section" id="dialogues">
+    <div class="section__head">
+      <h2>Example conversations</h2>
+      <p class="section__note">
+        Six scenes, A1 to B1: introductions, a café, a work call, directions, a stand-up, and a conversation
+        about learning Russian. Each scene names its roles; the learner's line is the second speaker. Read a
+        scene aloud, then run the same situation in the trainer, which checks answers and corrects the form.
+      </p>
+    </div>
+    <div class="dialogue-list" id="dialogue-list">
+      <noscript><p class="noscript">The dialogues need JavaScript.</p></noscript>
+    </div>
+    <p class="count">The ▶ button plays a bundled recording of the line (neural Russian voice, slowed slightly for learners).</p>
+  </section>
+
+  <!-- ============================== DICTIONARY ============================== -->
+  <section class="section" id="dictionary">
+    <div class="section__head">
+      <h2>The dictionary</h2>
+      <p class="section__note">
+        734 entries of core vocabulary — function words, pronouns, the verbs of getting things done, and the
+        nouns of software work, each with a grammar note. Search matches Russian, transliteration, or English.
+      </p>
+    </div>
+
+    <div class="controls" role="search">
+      <label class="field field--grow">
+        <span class="field__label">Search</span>
+        <input id="dict-q" type="search" placeholder="принято, prinyato, acknowledged, case…" autocomplete="off" spellcheck="false">
+      </label>
+      <label class="field">
+        <span class="field__label">Part of speech</span>
+        <select id="dict-pos">
+          <option value="">All</option>
+          <option value="verb">verb</option>
+          <option value="noun">noun</option>
+          <option value="adj">adjective</option>
+          <option value="adv">adverb</option>
+          <option value="pron">pronoun</option>
+          <option value="prep">preposition</option>
+          <option value="conj">conjunction</option>
+          <option value="particle">particle</option>
+          <option value="num">numeral</option>
+          <option value="predicative">predicative</option>
+          <option value="interj">interjection</option>
+          <option value="phrase">phrase</option>
+        </select>
+      </label>
+      <label class="field">
+        <span class="field__label">Sort</span>
+        <select id="dict-sort">
+          <option value="ru">Russian A–Я</option>
+          <option value="en">English A–Z</option>
+        </select>
+      </label>
+      <button class="btn" id="dict-reset" type="button">Reset</button>
+    </div>
+
+    <p class="count" id="dict-count" aria-live="polite">—</p>
+
+    <div class="table-wrap">
+      <table class="dict">
+        <thead>
+          <tr>
+            <th scope="col">Russian</th>
+            <th scope="col">Transliteration</th>
+            <th scope="col">Part of speech</th>
+            <th scope="col">English</th>
+            <th scope="col">Notes &amp; example</th>
+          </tr>
+        </thead>
+        <tbody id="dict-body"></tbody>
+      </table>
+      <p class="empty" id="dict-empty" hidden>Nothing matches. Try a shorter query.</p>
+    </div>
+    <div class="more-wrap">
+      <button class="btn btn--ghost" id="dict-more" type="button" hidden>Show more</button>
+    </div>
+  </section>
+
+  <!-- ============================== LANGUAGE ============================== -->
+  <section class="section" id="language">
+    <div class="section__head">
+      <h2>The language in one page</h2>
+      <p class="section__note">Russian is not “English with different words”. Almost every design decision is different.</p>
+    </div>
+
+    <div class="prose">
+      <p>
+        <strong>Russian</strong> (<span lang="ru">ру́сский язы́к</span>, <em>rússkiy yazýk</em>) is an East Slavic
+        language in the Indo-European family, written in the Cyrillic alphabet. It has roughly 150 million
+        native speakers and another 100 million who use it as a second language. It is the official language of
+        the Russian Federation and a state or official language in Belarus, Kazakhstan and Kyrgyzstan, and it
+        remains widely used across the former Soviet Union.
+      </p>
+      <p>
+        Typologically it is <strong>fusional and synthetic</strong>: meaning is carried by endings fused into
+        single morphemes rather than by separate words. Where English says <em>of the book</em>, Russian says
+        <span lang="ru">кни́ги</span> — one ending, three grammatical facts (feminine, singular, genitive).
+        Russian has <strong>no articles</strong>, <strong>no fixed word order</strong>, <strong>no present-tense
+        copula</strong>, and a verbal system organised around <strong>aspect</strong> rather than around tense.
+      </p>
+      <p>
+        The headline numbers: <strong>33 letters</strong>, <strong>6 cases</strong>, <strong>3 genders</strong>
+        plus animacy, <strong>2 numbers</strong>, <strong>2 aspects</strong>, <strong>3 tenses</strong> in
+        practice, and a stress accent that is free, mobile, and not written.
+      </p>
+    </div>
+
+    <h3 class="subhead" id="alphabet">Alphabet</h3>
+    <p class="section__note">Click a letter for its name, sound, and behaviour. Ten vowels, twenty-one consonants, two silent signs.</p>
+    <div class="alphabet" id="alphabet-grid" aria-label="Russian alphabet"></div>
+    <div class="letter-panel" id="letter-panel" aria-live="polite">
+      <p class="letter-panel__hint">Select a letter above.</p>
+    </div>
+
+    <div class="prose">
+      <h3 class="subhead">Sound system</h3>
+      <p>
+        Russian has five vowel phonemes — <span class="ipa">/a e i o u/</span> — plus <span class="ipa">/ɨ/</span>,
+        written <span lang="ru">ы</span>. The crucial fact for a learner is <strong>vowel reduction</strong>:
+        unstressed <span lang="ru">о</span> is pronounced <span class="ipa">[ɐ]</span> or <span class="ipa">[ə]</span>,
+        so <span lang="ru">молоко́</span> sounds like <em>məlɐˈko</em>, not <em>moloko</em>. Unstressed
+        <span lang="ru">е</span> tends toward <span class="ipa">[ɪ]</span>, which is why
+        <span lang="ru">язы́к</span> is <em>yizýk</em> in running speech.
+      </p>
+      <p>
+        Consonants come in <strong>hard/soft pairs</strong>: <span lang="ru">т</span> vs
+        <span lang="ru">ть</span> (palatalised), <span lang="ru">л</span> vs <span lang="ru">ль</span>.
+        Softness is phonemic — <span lang="ru">угол</span> “corner” and <span lang="ru">уголь</span> “coal”
+        differ only in that one feature. Voiced consonants devoice word-finally and before voiceless ones:
+        <span lang="ru">друг</span> is <em>druk</em>; <span lang="ru">второ́й</span> is <em>ftaróy</em>.
+        <span lang="ru">ш ж ц</span> are always hard; <span lang="ru">ч щ й</span> are always soft.
+      </p>
+      <p>
+        <strong>Stress</strong> is lexical, free, and mobile: it can fall on any syllable, and it moves between
+        forms of the same word (<span lang="ru">го́род</span> “city”, <span lang="ru">города́</span> “cities”,
+        <span lang="ru">в го́роде</span> “in the city”). <span lang="ru">Ё</span> is always stressed; Russians
+        routinely write <span lang="ru">е</span> instead, which is why this page marks stress explicitly.
+      </p>
+
+      <h3 class="subhead">What Russian leaves out</h3>
+      <ul class="tight">
+        <li><strong>Articles.</strong> No <em>a/an/the</em>. Definiteness is inferred from word order, case, and context.</li>
+        <li><strong>The verb “to be” in the present.</strong> <span lang="ru">Это файл.</span> — “This is a file.” No verb.</li>
+        <li><strong>Subject pronouns.</strong> The ending already encodes person, so <span lang="ru">отвеча́ю</span> is “I answer” without <span lang="ru">я</span>.</li>
+        <li><strong>“Have”.</strong> Russian says “at me there is”: <span lang="ru">у меня́ есть вопро́с</span> — literally “by me there-is a question”.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================== GRAMMAR ============================== -->
+  <section class="section" id="grammar">
+    <div class="section__head">
+      <h2>Grammar, in enough detail to be useful</h2>
+      <p class="section__note">Cases first — they are the part that makes Russian look like code.</p>
+    </div>
+
+    <h3 class="subhead" id="cases">The six cases</h3>
+    <p class="prose">
+      A case ending marks the role a noun plays. English does this with word order and prepositions;
+      Russian does it with the noun itself. <span lang="ru">Кни́га</span> (nominative) is the subject;
+      <span lang="ru">кни́гу</span> (accusative) is the object; <span lang="ru">кни́ги</span> (genitive) is
+      “of the book”; <span lang="ru">кни́ге</span> (dative/prepositional) is “to the book” or “about the book”.
+    </p>
+    <div class="table-wrap">
+      <table class="grid">
+        <thead>
+          <tr><th>Case</th><th>Russian</th><th>Question</th><th>Core function</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Nominative</td><td lang="ru">имени́тельный</td><td lang="ru">кто? что?</td><td>Subject; citation form</td><td lang="ru">Файл откры́т.</td></tr>
+          <tr><td>Genitive</td><td lang="ru">роди́тельный</td><td lang="ru">кого́? чего́?</td><td>Possession, absence, quantity, “of”</td><td lang="ru">Нет файла.</td></tr>
+          <tr><td>Dative</td><td lang="ru">да́тельный</td><td lang="ru">кому́? чему́?</td><td>Recipient, experiencer, “to/for”</td><td lang="ru">Дай мне файл.</td></tr>
+          <tr><td>Accusative</td><td lang="ru">вини́тельный</td><td lang="ru">кого́? что?</td><td>Direct object, motion “into/onto”</td><td lang="ru">Я ви́жу файл.</td></tr>
+          <tr><td>Instrumental</td><td lang="ru">твори́тельный</td><td lang="ru">кем? чем?</td><td>Instrument, agent, “with/by”</td><td lang="ru">Пишу́ ручко́й.</td></tr>
+          <tr><td>Prepositional</td><td lang="ru">предло́жный</td><td lang="ru">о ком? о чём?</td><td>Location, topic; always needs a preposition</td><td lang="ru">Говорю́ о файле.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose">
+      Two wrinkles worth knowing. First, <strong>animacy</strong>: for masculine singular and all plurals, the
+      accusative of a living thing copies the genitive — <span lang="ru">ви́жу кота́</span> (like
+      <span lang="ru">кота́</span>) but <span lang="ru">ви́жу стол</span> (like the nominative). Second,
+      a handful of nouns have a second <strong>locative</strong> used only with <span lang="ru">в</span> and
+      <span lang="ru">на</span>: <span lang="ru">в лесу́</span> “in the forest”, <span lang="ru">на мосту́</span>
+      “on the bridge”.
+    </p>
+
+    <h3 class="subhead">Case explorer</h3>
+    <p class="section__note">Pick a noun. The table shows its singular forms, the plural nominative, and a phrase that forces each case.</p>
+    <label class="field field--inline">
+      <span class="field__label">Noun</span>
+      <select id="paradigm-select"></select>
+    </label>
+    <div class="table-wrap">
+      <table class="grid" id="paradigm-table">
+        <thead><tr><th>Case</th><th>Form</th><th>Example</th><th>English</th></tr></thead>
+        <tbody id="paradigm-body"></tbody>
+      </table>
+    </div>
+    <p class="count" id="paradigm-note"></p>
+
+    <h3 class="subhead" id="nouns">Nouns: gender, number, declension</h3>
+    <div class="prose">
+      <p>
+        Gender is predictable from the nominative ending most of the time: masculine typically ends in a
+        consonant (<span lang="ru">стол</span>) or <span lang="ru">-й/-ь</span>; feminine in
+        <span lang="ru">-а/-я</span> or <span lang="ru">-ь</span>; neuter in <span lang="ru">-о/-е</span>.
+        The <span lang="ru">-ь</span> nouns are the trap: <span lang="ru">день</span> is masculine,
+        <span lang="ru">ночь</span> is feminine. Learn the gender with the word.
+      </p>
+      <p>
+        There are three productive declension patterns. Hard-stem masculine/neuter
+        (<span lang="ru">стол, окно́</span>), soft-stem masculine/neuter and feminine
+        (<span lang="ru">день, по́ле, неде́ля</span>), and the small <span lang="ru">-ь</span> feminine class
+        (<span lang="ru">ночь, мышь</span>) which looks like the soft pattern but has its own endings.
+        Irregulars are few but frequent: <span lang="ru">челове́к → лю́ди</span>, <span lang="ru">год → го́ды/лет</span>,
+        <span lang="ru">вре́мя</span> (neuter in <span lang="ru">-мя</span>), <span lang="ru">путь</span>.
+      </p>
+      <p>
+        Plural is not just “add -ы”. The genitive plural is the notorious one:
+        <span lang="ru">кни́га → книг</span> (zero ending), <span lang="ru">ме́сто → мест</span>,
+        <span lang="ru">стол → столо́в</span>, <span lang="ru">брат → бра́тьев</span>. A zero ending after a
+        hard consonant often inserts a fleeting vowel: <span lang="ru">окно́ → о́кон</span>.
+      </p>
+    </div>
+
+    <h3 class="subhead">Adjectives</h3>
+    <div class="prose">
+      <p>
+        Adjectives agree with the noun in gender, number and case, and the ending carries all of it:
+        <span lang="ru">но́вый файл</span>, <span lang="ru">но́вая кни́га</span>,
+        <span lang="ru">но́вое окно́</span>, <span lang="ru">но́вые фа́йлы</span>. In oblique cases the
+        masculine and neuter merge (<span lang="ru">но́вого фа́йла</span>).
+      </p>
+      <p>
+        There are also <strong>short forms</strong>, used predicatively:
+        <span lang="ru">Файл гото́в.</span> “The file is ready.” And comparison is synthetic:
+        <span lang="ru">бы́стрый → быстре́е</span>, with <span lang="ru">са́мый</span> for the superlative
+        (<span lang="ru">са́мый бы́стрый</span>), plus a few suppletive forms
+        (<span lang="ru">хоро́ший → лу́чше</span>).
+      </p>
+    </div>
+
+    <h3 class="subhead" id="verbs">Verbs: aspect is the engine</h3>
+    <div class="prose">
+      <p>
+        Every Russian verb belongs to an <strong>aspect pair</strong>. The imperfective describes a process, a
+        habit, or a repeated action; the perfective describes a single completed result. Both members translate
+        to the same English verb, which is why dictionaries list them together:
+        <span lang="ru">де́лать / сде́лать</span> “to do”, <span lang="ru">писа́ть / написа́ть</span> “to write”,
+        <span lang="ru">проверя́ть / провери́ть</span> “to check”.
+      </p>
+      <p>
+        Tense is then mostly a matter of aspect. Imperfective has three forms — past, present, future
+        (<span lang="ru">де́лал, де́лаю, бу́ду де́лать</span>); perfective has only two — past and future
+        (<span lang="ru">сде́лал, сде́лаю</span>), because a completed action cannot be in progress now.
+        The perfective “present” form <em>is</em> the future.
+      </p>
+      <p>
+        Past tense does not agree with person at all; it agrees with gender and number:
+        <span lang="ru">я де́лал / я де́лала</span>, <span lang="ru">мы де́лали</span>. The ending set is
+        <span lang="ru">-л, -ла, -ло, -ли</span>. Present/future endings fall into two conjugations
+        (<span lang="ru">-ешь/-ет</span> vs <span lang="ru">-ишь/-ит</span>), and the stem often changes:
+        <span lang="ru">писа́ть → пишу́, пи́шешь</span>.
+      </p>
+      <p>
+        Two more features do a lot of work. <strong>Reflexive</strong> verbs take <span lang="ru">-ся/-сь</span>
+        and often correspond to English intransitives or passives:
+        <span lang="ru">открыва́ться</span> “to open (by itself)”. <strong>Verbs of motion</strong> come in
+        directional/non-directional pairs — <span lang="ru">идти́/ходи́ть</span> “go on foot”,
+        <span lang="ru">е́хать/е́здить</span> “go by vehicle” — and the choice is grammatical, not stylistic.
+      </p>
+      <p>
+        Modality is often impersonal: <span lang="ru">ну́жно</span> “it is necessary”,
+        <span lang="ru">мо́жно</span> “it is possible / one may”, <span lang="ru">нельзя́</span> “it is
+        forbidden / impossible”, <span lang="ru">на́до</span> “one must”. They take an infinitive and no subject:
+        <span lang="ru">Ну́жно прове́рить.</span> “It needs checking.”
+      </p>
+    </div>
+
+    <h3 class="subhead">Pronouns and numerals</h3>
+    <div class="prose">
+      <p>
+        Personal pronouns decline, and the third person adds an <span lang="ru">н-</span> after a preposition:
+        <span lang="ru">у него́</span>, <span lang="ru">к ней</span>. <span lang="ru">Свой</span> is a reflexive
+        possessive that refers back to the subject — a word English simply lacks.
+      </p>
+      <p>
+        Numerals govern the genitive. <span lang="ru">Оди́н</span> agrees like an adjective;
+        <span lang="ru">два, три, четы́ре</span> take genitive singular
+        (<span lang="ru">два фа́йла</span>); <span lang="ru">пять</span> and above take genitive plural
+        (<span lang="ru">пять фа́йлов</span>); and numbers ending in 1 take the nominative singular again
+        (<span lang="ru">два́дцать оди́н файл</span>). This is why “21 files” and “22 files” have different
+        noun forms.
+      </p>
+    </div>
+
+    <h3 class="subhead" id="syntax">Word order and syntax</h3>
+    <div class="prose">
+      <p>
+        Russian word order is <strong>free but not arbitrary</strong>. The neutral order is Subject–Verb–Object,
+        but the order encodes information structure: what is given comes first, what is new comes last.
+        <span lang="ru">Ма́ша чита́ет кни́гу</span> answers “what is Masha doing?”;
+        <span lang="ru">Кни́гу чита́ет Ма́ша</span> answers “who is reading the book?”. Same words, different
+        focus. Intonation does the rest.
+      </p>
+      <p>
+        The present-tense copula is omitted, and a dash stands in for it when both sides are nouns:
+        <span lang="ru">Москва́ — столи́ца.</span> “Moscow is the capital.” Negation is <span lang="ru">не</span>
+        before the verb, and it is obligatory with negative pronouns — double negation is the norm:
+        <span lang="ru">Никто́ не пришёл.</span> literally “Nobody didn’t come.”
+      </p>
+      <p>
+        Questions usually need no inversion, only a question word or a rising contour:
+        <span lang="ru">Ты гото́в?</span> “Are you ready?” Subordination uses
+        <span lang="ru">что</span> “that”, <span lang="ru">что́бы</span> “in order that”,
+        <span lang="ru">е́сли</span> “if”, <span lang="ru">хотя́</span> “although”,
+        <span lang="ru">пока́</span> “while/until”.
+      </p>
+    </div>
+
+    <h3 class="subhead" id="pragmatics">Pragmatics: how Russians actually talk</h3>
+    <div class="prose">
+      <p>
+        <strong>Ты vs вы.</strong> <span lang="ru">Вы</span> is polite or plural; <span lang="ru">ты</span> is
+        intimate or informal. The choice is a social act, not a grammar error, and switching without invitation
+        is noticeable. Verb endings follow: <span lang="ru">вы чита́ете</span>, <span lang="ru">ты чита́ешь</span>.
+      </p>
+      <p>
+        <strong>Particles.</strong> Russian conversation runs on small untranslatable words:
+        <span lang="ru">же</span> (emphasis, “after all”), <span lang="ru">ведь</span> (shared knowledge,
+        “you know”), <span lang="ru">-то</span> (topic marker), <span lang="ru">вот</span> (presentational
+        “here”), <span lang="ru">ну</span> (hedging, “well”), <span lang="ru">уж</span> (resignation,
+        “already/really”). They carry the stance that English puts in intonation.
+      </p>
+      <p>
+        <strong>Diminutives</strong> are not only “small”: <span lang="ru">файлик</span> can be affectionate or
+        dismissive, <span lang="ru">зада́чка</span> can mean “a little task” or “a nasty problem”.
+        <strong>Politeness</strong> also lives in the imperative plus <span lang="ru">пожа́луйста</span>, and in
+        the conditional-softened <span lang="ru">не могли́ бы вы…</span> “could you possibly…”.
+      </p>
+    </div>
+
+    <h3 class="subhead">Typography</h3>
+    <div class="prose">
+      <p>
+        Russian uses «guillemets» for quotation, an em dash (—) for the omitted copula and for appositions, and
+        a comma before <span lang="ru">что, что́бы, е́сли, когда́</span> in subordinate clauses. Decimal
+        fractions take a comma (3,14), thousands a space (1 000 000). <span lang="ru">Ё</span> is legally
+        optional in print, which is why learners meet <span lang="ru">ещё</span> and <span lang="ru">еще</span>
+        in the same text.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================== TRAINER ============================== -->
+  <section class="section" id="trainer">
+    <div class="section__head">
+      <h2>Trainer: practise Russian</h2>
+      <p class="section__note">
+        Two modes. <strong>Сценарий</strong> runs entirely in the browser: a scripted dialogue that checks
+        answers, gives hints, and corrects the form. <strong>API-чат</strong> connects to any
+        OpenAI-compatible endpoint with a user-supplied key — no key is embedded in the page.
+      </p>
+    </div>
+
+    <div class="tutor">
+      <div class="tutor__bar">
+        <div class="segmented" role="group" aria-label="Режим тренажёра">
+          <button type="button" id="mode-lesson" aria-pressed="true">Сценарий</button>
+          <button type="button" id="mode-api" aria-pressed="false">API-чат</button>
+        </div>
+        <div class="tutor__actions">
+          <button type="button" class="btn" id="tutor-hint">Подсказка</button>
+          <button type="button" class="btn" id="tutor-translate" aria-pressed="false">Перевод</button>
+          <button type="button" class="btn" id="tutor-restart">Заново</button>
+        </div>
+      </div>
+
+      <div class="tutor__status" id="tutor-status">Загрузка…</div>
+
+      <div class="chat" id="chat-log" role="log" aria-live="polite" aria-label="Диалог с тренажёром"></div>
+
+      <form class="chat__form" id="chat-form">
+        <label class="sr-only" for="chat-input">Сообщение по-русски</label>
+        <input id="chat-input" type="text" autocomplete="off" spellcheck="false" placeholder="Сообщение по-русски…">
+        <button class="btn" type="submit">Отправить</button>
+      </form>
+
+      <div class="chips" id="lesson-picker" aria-label="Выбор сценария"></div>
+
+      <details class="api-settings" id="api-settings">
+        <summary>Подключить API (OpenAI-совместимый)</summary>
+        <div class="api-grid">
+          <label class="field">
+            <span class="field__label">Base URL</span>
+            <input id="api-base" type="url" value="https://api.openai.com/v1" spellcheck="false" autocomplete="off">
+          </label>
+          <label class="field">
+            <span class="field__label">Model</span>
+            <input id="api-model" type="text" value="gpt-4o-mini" spellcheck="false" autocomplete="off">
+          </label>
+          <label class="field">
+            <span class="field__label">API key</span>
+            <input id="api-key" type="password" placeholder="sk-…" autocomplete="off">
+          </label>
+          <label class="field">
+            <span class="field__label">Level</span>
+            <select id="api-level">
+              <option>A1</option>
+              <option selected>A2</option>
+              <option>B1</option>
+              <option>B2</option>
+            </select>
+          </label>
+        </div>
+        <label class="check">
+          <input id="api-remember" type="checkbox">
+          Запомнить ключ в этом браузере
+        </label>
+        <div class="api-actions">
+          <button class="btn" type="button" id="api-save">Сохранить</button>
+        </div>
+        <p class="api-note">
+          Ключ не встроен в сайт и уходит только на указанный endpoint. Для локальных моделей
+          (Ollama, LM Studio) ключ можно оставить пустым; тогда сервер должен разрешать CORS с этого адреса.
+          История чата живёт в памяти вкладки и сбрасывается кнопкой «Заново».
+        </p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================== ABOUT ============================== -->
+  <section class="section" id="about">
+    <div class="section__head">
+      <h2>About this project</h2>
+      <p class="section__note">A free, static Russian course designed to be used, forked, and taught from.</p>
+    </div>
+
+    <p class="credit">Created and built by <strong>fishy/birdy</strong> — concept, curriculum, dictionary, dialogues, trainer, and audio pipeline, the whole thing.</p>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>What is here</h3>
+        <p>A 10-step roadmap, a 33-letter interactive alphabet, a full grammar reference, six dialogues with
+           recordings, a 734-entry dictionary, and a two-mode trainer. No account, no build step.</p>
+      </div>
+      <div class="about-card">
+        <h3>Audio</h3>
+        <p>47 recordings generated with edge-tts neural voices (Microsoft Svetlana and Dmitry), slowed to −5%
+           for learners. Each line is a separate MP3 under <code>audio/</code>.</p>
+      </div>
+      <div class="about-card">
+        <h3>Open source</h3>
+        <p>Released under the MIT License. Plain HTML, CSS, and JavaScript; every asset is local; the site is
+           ready to publish on GitHub Pages from the repository root.</p>
+      </div>
+      <div class="about-card">
+        <h3>Privacy</h3>
+        <p>No cookies, analytics, fonts, or third-party requests. The only network call the page can make is
+           the optional API trainer configured by the user, with a key stored only in that browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p><strong>Learn Russian</strong> — a free A1–B1 course. Created by <strong>fishy/birdy</strong>. Released under the MIT License.</p>
+    <p class="footer__meta">Grammar references: standard Russian grammar (Švedova et al., <em>Русская грамматика</em>) and the usual literature on East Slavic. Audio: edge-tts neural voices (Svetlana, Dmitry). Stress marks are for learners and are not part of normal orthography.</p>
+    <p><a href="#top">Back to top</a> · <a href="LICENSE">License</a></p>
+  </footer>
+</main>
+
+<script src="js/conversations.js"></script>
+<script src="js/dict-function.js"></script>
+<script src="js/dict-verbs.js"></script>
+<script src="js/dict-nouns.js"></script>
+<script src="js/trainer.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
