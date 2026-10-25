@@ -8,6 +8,8 @@ two-mode trainer.
 Created and built by **fishy/birdy** — concept, curriculum, dictionary, dialogues, trainer, and
 audio pipeline.
 
+https://arrogantcoder.github.io/russian/
+
 ## Features
 
 - **10-step roadmap** from the alphabet to independent conversation, with a first-week schedule
