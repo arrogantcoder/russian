@@ -37,6 +37,19 @@
     return esc(text.slice(0, at)) + "<mark>" + esc(text.slice(at, at + plain.length)) + "</mark>" + esc(text.slice(at + plain.length));
   }
 
+  /* Strip learner stress marks but keep ё — speech engines should see «ещё», not «еще». */
+  function stripStress(text) {
+    return String(text).normalize("NFD").replace(/́/g, "").normalize("NFC");
+  }
+
+  function prefersReducedMotion() {
+    return Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }
+
+  function isMobileViewport() {
+    return Boolean(window.matchMedia && window.matchMedia("(max-width: 720px)").matches);
+  }
+
   /* ------------------------------------------------------------------ */
   /* Dictionary                                                         */
   /* ------------------------------------------------------------------ */
@@ -59,7 +72,8 @@
   })();
 
   const PAGE = 100;
-  const dictState = { q: "", pos: "", sort: "ru", shown: PAGE };
+  const INITIAL_PAGE = isMobileViewport() ? 40 : PAGE;
+  const dictState = { q: "", pos: "", sort: "ru", shown: INITIAL_PAGE };
 
   const dictBody = $("#dict-body");
   const dictCount = $("#dict-count");
@@ -124,7 +138,7 @@
   }
 
   function resetPaging() {
-    dictState.shown = PAGE;
+    dictState.shown = INITIAL_PAGE;
   }
 
   if (dictQ) {
@@ -163,7 +177,7 @@
       dictState.q = "";
       dictState.pos = "";
       dictState.sort = "ru";
-      dictState.shown = PAGE;
+      dictState.shown = INITIAL_PAGE;
       dictQ.value = "";
       dictPos.value = "";
       dictSort.value = "ru";
@@ -240,7 +254,27 @@
 
   function playLine(button) {
     const source = button.dataset.audio;
-    if (!source) return;
+
+    /* Phrasebook buttons have no MP3: speak them directly with the browser voice. */
+    if (!source) {
+      if (!button.dataset.say) return;
+      if (activeButton === button) {
+        stopAudio();
+        window.speechSynthesis && window.speechSynthesis.cancel();
+        return;
+      }
+      stopAudio();
+      button.classList.add("is-playing");
+      activeButton = button;
+      speakWithBrowser(button.dataset.say);
+      window.setTimeout(() => {
+        if (activeButton === button) {
+          button.classList.remove("is-playing");
+          activeButton = null;
+        }
+      }, 2200);
+      return;
+    }
 
     /* Clicking the playing line again stops it. */
     if (activeButton === button) {
@@ -279,6 +313,361 @@
       const button = event.target.closest(".speak");
       if (button) playLine(button);
     });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Phrasebook                                                         */
+  /* ------------------------------------------------------------------ */
+
+  const phraseState = { q: "", cat: "all" };
+  const phraseGrid = $("#phrase-grid");
+  const phraseCount = $("#phrase-count");
+  const phraseEmpty = $("#phrase-empty");
+  const phraseFilters = $("#phrase-filters");
+  const phraseQ = $("#phrase-q");
+
+  function phraseMatches(phrase) {
+    if (phraseState.cat !== "all" && phrase.cat !== phraseState.cat) return false;
+    const q = fold(phraseState.q.trim());
+    if (!q) return true;
+    return fold(phrase.ru).includes(q) ||
+      fold(phrase.tr).includes(q) ||
+      fold(phrase.en).includes(q) ||
+      fold(phrase.note || "").includes(q) ||
+      fold(phrase.register || "").includes(q);
+  }
+
+  function renderPhraseFilters() {
+    if (!phraseFilters || typeof PHRASE_CATEGORIES === "undefined") return;
+    phraseFilters.innerHTML = PHRASE_CATEGORIES.map((category) => `
+      <button class="phrase-filter" type="button" data-cat="${esc(category.id)}"
+        aria-pressed="${category.id === phraseState.cat}" title="${esc(category.ru || "")}">
+        ${esc(category.label)}
+      </button>`).join("");
+  }
+
+  function renderPhrases() {
+    if (!phraseGrid || typeof PHRASES === "undefined") return;
+    const rows = PHRASES.filter(phraseMatches);
+
+    phraseGrid.innerHTML = rows.map((phrase) => {
+      const spoken = stripStress(phrase.ru).replace(/[«»]/g, "");
+      const tag = phrase.register
+        ? `<span class="phrase-card__tag">${esc(phrase.register)}</span>`
+        : "";
+      const note = phrase.note
+        ? `<p class="phrase-card__note">${esc(phrase.note)}</p>`
+        : "";
+      return `<article class="phrase-card">
+        <p class="phrase-card__ru" lang="ru">${esc(phrase.ru)}</p>
+        <p class="phrase-card__tr">${esc(phrase.tr)}</p>
+        <p class="phrase-card__en">${esc(phrase.en)}${tag}</p>
+        ${note}
+        <div class="phrase-card__actions">
+          <button class="speak speak--phrase" type="button" data-say="${esc(spoken)}"
+            aria-label="Прослушать фразу" title="Прослушать">▶</button>
+          <button class="copy-phrase" type="button" data-copy="${esc(stripStress(phrase.ru))}"
+            title="Copy Russian without stress marks">Copy</button>
+        </div>
+      </article>`;
+    }).join("");
+
+    if (phraseEmpty) phraseEmpty.hidden = rows.length !== 0;
+
+    if (phraseCount) {
+      const total = PHRASES.length;
+      phraseCount.textContent = phraseState.q.trim() || phraseState.cat !== "all"
+        ? `${rows.length} ${rows.length === 1 ? "match" : "matches"} · ${total} phrases in total`
+        : `${total} phrases · greetings, small talk, and practical sentences`;
+    }
+  }
+
+  function initPhrases() {
+    if (typeof PHRASES === "undefined") return;
+    renderPhraseFilters();
+    renderPhrases();
+
+    if (phraseQ) {
+      phraseQ.addEventListener("input", () => {
+        phraseState.q = phraseQ.value;
+        renderPhrases();
+      });
+    }
+
+    if (phraseFilters) {
+      phraseFilters.addEventListener("click", (event) => {
+        const button = event.target.closest(".phrase-filter");
+        if (!button) return;
+        phraseState.cat = button.dataset.cat;
+        phraseFilters.querySelectorAll(".phrase-filter").forEach((item) => {
+          item.setAttribute("aria-pressed", String(item === button));
+        });
+        renderPhrases();
+      });
+    }
+  }
+
+  function legacyCopy(text) {
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.setAttribute("readonly", "");
+    area.style.position = "fixed";
+    area.style.top = "-1000px";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+    area.setSelectionRange(0, area.value.length);
+    let ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } catch (error) {
+      ok = false;
+    }
+    area.remove();
+    return ok;
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).then(() => true, () => legacyCopy(text));
+    }
+    return Promise.resolve(legacyCopy(text));
+  }
+
+  function initCopy() {
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-copy]");
+      if (!button) return;
+      copyText(button.dataset.copy).then((ok) => {
+        const original = button.dataset.label || button.textContent.trim();
+        button.dataset.label = original;
+        button.textContent = ok ? "Copied" : "Select + copy";
+        button.classList.toggle("is-copied", ok);
+        window.setTimeout(() => {
+          button.textContent = original;
+          button.classList.remove("is-copied");
+        }, 1500);
+      });
+    });
+  }
+
+  function initHeroGreeting() {
+    const card = $("#hero-greeting-card");
+    const ru = $("#hero-greeting");
+    const meta = $("#hero-greeting-meta");
+    if (!card || !ru || !meta || typeof PHRASES === "undefined") return;
+
+    const picks = PHRASES.filter((phrase) => phrase.cat === "greetings");
+    if (!picks.length) return;
+
+    let index = 0;
+    const paint = () => {
+      const phrase = picks[index % picks.length];
+      ru.textContent = phrase.ru;
+      meta.textContent = phrase.register
+        ? `${phrase.en} · ${phrase.register}`
+        : phrase.en;
+      index += 1;
+    };
+
+    paint();
+    if (prefersReducedMotion()) return;
+
+    window.setInterval(() => {
+      if (document.hidden) return;
+      card.classList.add("is-swapping");
+      window.setTimeout(() => {
+        paint();
+        card.classList.remove("is-swapping");
+      }, 260);
+    }, 4600);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Loading, scroll position, and scroll-linked UI                     */
+  /* ------------------------------------------------------------------ */
+
+  function finishLoading() {
+    const root = document.documentElement;
+    const elapsed = typeof performance !== "undefined" && performance.now ? performance.now() : 0;
+    window.setTimeout(() => {
+      root.classList.add("is-loaded");
+      root.classList.remove("is-loading");
+    }, Math.max(0, 460 - elapsed));
+  }
+
+  function scrollToTopInstant() {
+    const root = document.documentElement;
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = previous;
+  }
+
+  function scrollTargetIntoViewInstant(target) {
+    const root = document.documentElement;
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    target.scrollIntoView({ block: "start" });
+    root.style.scrollBehavior = previous;
+  }
+
+  function initScrollPosition() {
+    const entries = performance.getEntriesByType ? performance.getEntriesByType("navigation") : [];
+    const navigation = entries && entries[0];
+    const isReload = Boolean(navigation && navigation.type === "reload");
+
+    /* A reload should always start at the top, even if the URL kept a section hash. */
+    if (isReload && window.location.hash) {
+      try {
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      } catch (error) { /* file:// origins can refuse this */ }
+    }
+
+    const honorHash = Boolean(window.location.hash) && !isReload;
+
+    if (!honorHash) {
+      scrollToTopInstant();
+      window.requestAnimationFrame(() => {
+        scrollToTopInstant();
+        window.requestAnimationFrame(scrollToTopInstant);
+      });
+      window.addEventListener("load", () => window.setTimeout(scrollToTopInstant, 80), { once: true });
+      return;
+    }
+
+    let target = null;
+    try {
+      target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+    } catch (error) {
+      target = null;
+    }
+    if (!target) {
+      scrollToTopInstant();
+      return;
+    }
+    /* Chromium can restore a fragment offset clamped before the dictionary and
+       phrasebook grew the page, which leaves deep links short of the target.
+       Re-anchor after the loader unlocks scrolling, but never fight a visitor
+       who has already started moving through the page. */
+    let moved = false;
+    const noteMove = () => { moved = true; };
+    ["wheel", "touchmove", "pointerdown", "keydown"].forEach((type) => {
+      window.addEventListener(type, noteMove, { passive: true, once: true });
+    });
+    const anchor = () => {
+      if (!moved) scrollTargetIntoViewInstant(target);
+    };
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(anchor);
+    });
+    window.setTimeout(anchor, 700);
+    window.addEventListener("load", () => window.setTimeout(anchor, 150), { once: true });
+  }
+
+  function initScrollUI() {
+    const bar = $("#scroll-progress-bar");
+    const toTop = $("#to-top");
+    const nav = $("#site-nav");
+    const links = nav ? Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]')) : [];
+    const targets = links.map((link) => {
+      const element = document.getElementById(link.getAttribute("href").slice(1));
+      return element ? { link, element } : null;
+    }).filter(Boolean);
+
+    let queued = false;
+
+    const update = () => {
+      queued = false;
+      const root = document.documentElement;
+      const max = root.scrollHeight - window.innerHeight;
+      const y = window.scrollY || root.scrollTop || 0;
+
+      if (bar) {
+        const ratio = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
+        bar.style.transform = `scaleX(${ratio})`;
+      }
+
+      if (toTop) toTop.classList.toggle("is-visible", y > 900);
+
+      let best = null;
+      targets.forEach((item) => {
+        const top = item.element.getBoundingClientRect().top;
+        if (top <= 150 && (!best || top > best.top)) best = { top, link: item.link };
+      });
+      links.forEach((link) => {
+        if (best && link === best.link) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+    };
+
+    const queue = () => {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue, { passive: true });
+    window.addEventListener("load", queue);
+    update();
+
+    if (toTop) {
+      toTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+      });
+    }
+  }
+
+  function initReveal() {
+    const selector = [
+      ".section__head",
+      ".study-card",
+      ".step",
+      ".dialogue",
+      ".table-wrap",
+      ".tutor",
+      ".about-card",
+      ".credit",
+      ".alphabet",
+      ".letter-panel",
+      ".phrase-grid",
+      ".prose",
+      "#language .subhead",
+      "#grammar .subhead"
+    ].join(",");
+    const elements = Array.prototype.slice.call(document.querySelectorAll(selector));
+    if (!elements.length) return;
+
+    elements.forEach((element) => element.classList.add("reveal"));
+
+    if (!("IntersectionObserver" in window) || prefersReducedMotion()) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    document.querySelectorAll(".roadmap .step").forEach((step, index) => {
+      step.style.setProperty("--reveal-delay", `${Math.min(index, 3) * 45}ms`);
+    });
+    document.querySelectorAll(".about-grid .about-card").forEach((card, index) => {
+      card.style.setProperty("--reveal-delay", `${index * 60}ms`);
+    });
+    document.querySelectorAll(".dialogue-list .dialogue").forEach((dialogue, index) => {
+      dialogue.style.setProperty("--reveal-delay", `${Math.min(index, 3) * 60}ms`);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    /* Threshold 0, not a ratio: the phrase grid is taller than the viewport,
+       so a fractional threshold could stay unmet when a deep link lands on it. */
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0 });
+
+    elements.forEach((element) => observer.observe(element));
   }
 
   /* ------------------------------------------------------------------ */
@@ -559,6 +948,10 @@
         : 0;
       recordings.textContent = String(lines);
     }
+    const phrases = $("#stat-phrases");
+    if (phrases) {
+      phrases.textContent = String(typeof PHRASES !== "undefined" ? PHRASES.length : 0);
+    }
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -568,6 +961,13 @@
     renderAlphabet();
     renderDictionary();
     initParadigms();
+    initPhrases();
     initStats();
+    initHeroGreeting();
+    initCopy();
+    initReveal();
+    initScrollPosition();
+    initScrollUI();
+    finishLoading();
   });
 })();

@@ -2,7 +2,8 @@
 
 A free, static Russian course for beginners (A1–B1). Everything runs in the browser: a 10-step
 roadmap, an interactive alphabet, a full grammar reference, six dialogues with bundled audio,
-a 734-entry dictionary, and a two-mode trainer.
+a 734-entry dictionary, a searchable phrasebook of 114 greetings and practical sentences, and a
+two-mode trainer.
 
 Created and built by **fishy/birdy** — concept, curriculum, dictionary, dialogues, trainer, and
 audio pipeline.
@@ -17,10 +18,16 @@ audio pipeline.
   conjugation, pronouns, numerals, word order, negation, pragmatics, typography.
 - **Six dialogues** (A1–B1) with stress-marked transliteration, English translation, grammar notes,
   key phrases, and one MP3 per line (47 recordings).
+- **Greetings and practical phrases**: 114 stress-marked phrases in eight categories, searchable
+  by Cyrillic, transliteration, or English, with a category filter, browser TTS, and one-tap
+  copying without stress marks.
 - **Dictionary**: 734 entries, searchable by Cyrillic, transliteration, or English; accent- and
   `ё`-folding; part-of-speech filter; paged rendering.
 - **Trainer**: four scripted offline role-plays with answer checking, hints, and corrections;
   optional chat against any OpenAI-compatible endpoint.
+- **Fluid loading and navigation**: a short branded loader, staggered reveal-on-scroll, a reading
+  progress bar, active section navigation, and a back-to-top control. Pages open at the top on
+  first visit and reload; section links are re-anchored after the dictionary and phrasebook render.
 - **Fixed purple dark theme**: deep purple-black surfaces, lavender text, violet accents; no theme
   switch and no light mode.
 - **No build step**, no accounts, no analytics. All assets are local except the optional API call.
@@ -29,13 +36,14 @@ audio pipeline.
 
 ```
 index.html            page structure and prose
-css/styles.css        themes, responsive layout, print styles
+css/styles.css        fixed theme, responsive layout, motion, print styles
 js/conversations.js   six dialogues, translations, notes, key phrases
+js/phrases.js         greetings and practical phrases, categories
 js/dict-function.js   pronouns, prepositions, conjunctions, particles, adverbs
 js/dict-verbs.js      verbs with aspect partners and conjugation notes
 js/dict-nouns.js      nouns, adjectives, numerals, conversational tokens
 js/trainer.js         scripted trainer, answer checking, API chat client
-js/app.js             dictionary, dialogues, alphabet, case explorer, theme, audio
+js/app.js             dictionary, dialogues, alphabet, phrasebook, loading/scroll UI, audio
 audio/*.mp3           47 recordings, one per dialogue line
 favicon.svg           site icon
 .nojekyll             tells GitHub Pages not to run Jekyll
@@ -106,9 +114,17 @@ MIT. See [LICENSE](LICENSE).
 ## Verified
 
 - Load: 33 letter tiles, 6 dialogues / 47 lines / 47 play buttons, 10 roadmap steps, 734 dictionary
-  entries, 6 case-explorer rows, computed stat counters; no console errors.
+  entries, 114 phrase cards, 6 case-explorer rows, computed stat counters.
 - Search by Cyrillic, accent-folded transliteration, and English returns expected entries; the verb
   filter returns 261 matches; paging reaches all 734.
+- Phrasebook: 114 phrases across eight categories; `coffee` returns one match, the café filter
+  returns ten, and the two combine correctly; copy produces clean Russian without stress marks;
+  play/copy states reset.
+- Scroll: a first visit and a reload both land at `scrollY` 0 (tested from 9000 px) with no trainer
+  focus; a `#phrases` deep link lands 96 px from the top on desktop and 76 px on mobile after the
+  dynamic sections render. Progress, active nav, and back-to-top update while scrolling.
+- Mobile: no horizontal overflow at 320–1280 px; 44 px menu toggle, 16 px inputs, 44 px targets,
+  safe-area padding, stacked dictionary cards, and single-column phrase cards at 390 px.
 - Trainer: wrong answers produce hints, correct answers advance with notes, three misses advance a
   step, a full lesson reaches «готово».
 - API chat: streamed replies from a local mock endpoint; unreachable endpoint produces an error
@@ -117,6 +133,7 @@ MIT. See [LICENSE](LICENSE).
   stops on a second click.
 - Theme: fixed dark palette only; no toggle and no light-mode code path. Measured contrast:
   text/background 16.5:1, muted text 7.6:1, links 9.9:1, button text on accent 11.2:1.
-- Mobile: no horizontal overflow at 320–1280 px; menu, 16 px inputs, 44 px targets, instant anchor
-  jumps, safe-area padding, stacked dictionary cards.
+- Loading and motion: the loader clears after its minimum display time, with a 2.6 s inline
+  fallback; reveal-on-scroll, hero entrance, card/link transitions, and the progress bar respect
+  `prefers-reduced-motion`.
 - GitHub Pages: relative asset paths, `.nojekyll` present, `LICENSE` and `favicon.svg` linked.

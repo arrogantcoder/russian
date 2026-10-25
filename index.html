@@ -5,17 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" id="theme-color" content="#0e0916">
-<script>document.documentElement.classList.add("js");</script>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    root.classList.add("js");
+    if (!calm) root.classList.add("is-loading");
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    /* Safety net: never leave the loader or scroll lock behind. */
+    window.setTimeout(function () {
+      root.classList.add("is-loaded");
+      root.classList.remove("is-loading");
+    }, 2600);
+  })();
+</script>
 <title>Learn Russian — free beginner course (A1–B1)</title>
-<meta name="description" content="A free Russian course for beginners: a 10-step roadmap, alphabet and pronunciation, six cases, verb aspect, a 734-entry dictionary, six dialogues with audio, and an offline trainer.">
+<meta name="description" content="A free Russian course for beginners: a 10-step roadmap, alphabet and pronunciation, six cases, verb aspect, 100+ greetings and practical phrases, a 734-entry dictionary, six dialogues with audio, and an offline trainer.">
 <meta property="og:title" content="Learn Russian — free beginner course">
-<meta property="og:description" content="A free Russian course for beginners: 10-step roadmap, alphabet, grammar, 734-entry dictionary, dialogues with audio, and a trainer.">
+<meta property="og:description" content="A free Russian course for beginners: 10-step roadmap, alphabet, grammar, 100+ greetings and practical phrases, 734-entry dictionary, dialogues with audio, and a trainer.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+<div class="page-loader" id="page-loader" aria-hidden="true">
+  <div class="page-loader__inner">
+    <span class="page-loader__mark" lang="ru">Р</span>
+    <span class="page-loader__word">Learn Russian</span>
+    <span class="page-loader__bar"><span></span></span>
+  </div>
+</div>
+<div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="topbar">
@@ -31,6 +52,7 @@
     <nav class="nav" id="site-nav" aria-label="Sections">
       <a href="#roadmap">Roadmap</a>
       <a href="#alphabet">Alphabet</a>
+      <a href="#phrases">Phrases</a>
       <a href="#grammar">Grammar</a>
       <a href="#dialogues">Dialogues</a>
       <a href="#dictionary">Dictionary</a>
@@ -48,9 +70,13 @@
     <h1>Learn Russian<br>from zero.</h1>
     <p class="lede">
       A complete beginner course that runs entirely in the browser: a roadmap in ten steps, the
-      alphabet and sound system, six cases and verb aspect, a 734-entry dictionary, six dialogues
-      with recordings, and a trainer that checks answers offline.
+      alphabet and sound system, six cases and verb aspect, 100+ greetings and practical phrases,
+      a 734-entry dictionary, six dialogues with recordings, and a trainer that checks answers offline.
     </p>
+    <div class="hero__greeting" id="hero-greeting-card" aria-hidden="true">
+      <span class="hero__greeting-ru" id="hero-greeting" lang="ru">Здра́вствуйте!</span>
+      <span class="hero__greeting-meta" id="hero-greeting-meta">hello · polite</span>
+    </div>
     <p class="hero__start"><a href="#roadmap">Start with the roadmap</a></p>
     <dl class="stats">
       <div><dt>Letters</dt><dd>33</dd></div>
@@ -59,6 +85,7 @@
       <div><dt>Dictionary entries</dt><dd id="stat-entries">—</dd></div>
       <div><dt>Dialogues</dt><dd id="stat-dialogues">—</dd></div>
       <div><dt>Recordings</dt><dd id="stat-recordings">—</dd></div>
+      <div><dt>Phrases</dt><dd id="stat-phrases">—</dd></div>
     </dl>
   </section>
 
@@ -445,6 +472,30 @@
     </div>
   </section>
 
+  <!-- ============================== PHRASEBOOK ============================== -->
+  <section class="section" id="phrases">
+    <div class="section__head">
+      <h2>Greetings &amp; everyday phrases</h2>
+      <p class="section__note">
+        The phrases that do the most work in the first month: hellos, goodbyes, introductions, thanks,
+        apologies, and practical sentences for the street, a shop, or a café. Tap ▶ to hear a phrase with
+        the browser's Russian voice; Copy gives clean Russian without the stress marks.
+      </p>
+    </div>
+
+    <div class="controls phrase-controls" role="search">
+      <label class="field field--grow">
+        <span class="field__label">Search phrases</span>
+        <input id="phrase-q" type="search" placeholder="привет, privet, hello, coffee…" autocomplete="off" spellcheck="false">
+      </label>
+    </div>
+
+    <div class="phrase-filters" id="phrase-filters" role="group" aria-label="Phrase categories"></div>
+    <p class="count" id="phrase-count" aria-live="polite">—</p>
+    <div class="phrase-grid" id="phrase-grid"></div>
+    <p class="empty" id="phrase-empty" hidden>Nothing matches. Try a shorter query or another category.</p>
+  </section>
+
   <!-- ============================== GRAMMAR ============================== -->
   <section class="section" id="grammar">
     <div class="section__head">
@@ -740,8 +791,9 @@
     <div class="about-grid">
       <div class="about-card">
         <h3>What is here</h3>
-        <p>A 10-step roadmap, a 33-letter interactive alphabet, a full grammar reference, six dialogues with
-           recordings, a 734-entry dictionary, and a two-mode trainer. No account, no build step.</p>
+        <p>A 10-step roadmap, a 33-letter interactive alphabet, a searchable phrasebook of greetings and
+           everyday sentences, a full grammar reference, six dialogues with recordings, a 734-entry dictionary,
+           and a two-mode trainer. No account, no build step.</p>
       </div>
       <div class="about-card">
         <h3>Audio</h3>
@@ -768,7 +820,12 @@
   </footer>
 </main>
 
+<button class="to-top" id="to-top" type="button" aria-label="Back to top" title="Back to top">
+  <span aria-hidden="true">↑</span>
+</button>
+
 <script src="js/conversations.js"></script>
+<script src="js/phrases.js"></script>
 <script src="js/dict-function.js"></script>
 <script src="js/dict-verbs.js"></script>
 <script src="js/dict-nouns.js"></script>

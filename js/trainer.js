@@ -255,7 +255,8 @@ function clearLog() {
 
 /* ------------------------------ lessons ------------------------------ */
 
-function startLesson(index) {
+function startLesson(index, options) {
+  const opts = options || {};
   TRAINER.mode = "lesson";
   TRAINER.lesson = Number(index) || 0;
   TRAINER.step = 0;
@@ -268,7 +269,9 @@ function startLesson(index) {
   bot(lesson.steps[0].prompt, { en: lesson.steps[0].en });
   updateLessonStatus();
   renderLessonPicker();
-  input.focus();
+  /* The initial call must not steal focus: focusing the input below the fold
+     used to scroll the page to the trainer as soon as the site loaded. */
+  if (opts.focus !== false) input.focus({ preventScroll: true });
 }
 
 function updateLessonStatus() {
@@ -661,7 +664,7 @@ function init() {
     }
   });
 
-  startLesson(0);
+  startLesson(0, { focus: false });
 }
 
 if (document.readyState === "loading") {
